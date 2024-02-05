@@ -28,7 +28,7 @@ SECRET_KEY = '+^u&iw02(oed$j8(_!98lmi!zx2ren**7+suqc7*e*f6k4hlt9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','web-production-3742.up.railway.app']
 
 
 # Application definition
@@ -175,8 +175,8 @@ STATIC_URL='https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN,AWS_LOCATION)
 # STATICFILES_DIRS= [os.path.join(BASE_DIR, "assets"),]
 # # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_URL= '/media/'
-MEDIA_ROOT= os.path.join(BASE_DIR,'media')
+# MEDIA_URL= '/media/'
+# MEDIA_ROOT= os.path.join(BASE_DIR,'media')
 
 JAZZMIN_SETTINGS = {
     "site_logo": "images/PSS Logo small.png",
