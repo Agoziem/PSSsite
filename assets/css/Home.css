@@ -1,0 +1,715 @@
+/* Define CSS Varibles for the Root Elements*/
+:root {
+    --Wine-red: #011B4D;
+    --cream-color: #ffffff;
+    --dark-cream: #e4e5e6;
+    --royal-blue-light: #011B4D;
+    --royal-blue-dark: #020D23;
+    --grey-color: #D9D9D9;
+    --black: #000;
+    --main-bg-color: #ffffff;
+    --bg-wine-red: #001943;
+    --bg-dark-wine-red: #000c21;
+    --bg-dark-cream: #e4e5e6;
+    --bg-white: #fff;
+    --bg-royal-blue-light: #011B4D;
+    --bg-light: #ededed;
+    --btn-wine-red: #000c21;
+    --btn-cream-color: #fffefa;
+    --btn-orange-color: rgb(250, 178, 44);
+    --btn-dark-cream-color: #e4e5e6;
+    --main-font-family: "Century Gothic","League Spartan", sans-serif;
+    --secondary-font-family: "League Spartan", sans-serif;
+    --display1-text-size: 60px;
+    --display1-text-sm-size: 30px;
+    --display2-text-size: 24px;
+    --display2-text-sm-size: 15px;
+    --Sideline-text-size: 15.5px;
+    --main-text-color: #000;
+    --card-border-radius: 17px;
+    --big-card-shadow: 0px 3.50236px 59.5402px -16.6362px rgba(0, 0, 0, 0.25);
+}
+/*  */
+
+
+body {
+    background-color: var(--main-bg-color);
+    font-family: var(--secondary-font-family);
+}
+
+body::before {
+    display: block;
+    content: '';
+    height: 41px;
+}
+
+@media (max-width: 768px) {
+    #body::after {
+        display: block;
+        content: '';
+        height: 41px;
+    }
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  main{
+    flex: 1;
+    padding: 0;
+  }
+  
+  footer {
+    margin-top: auto;
+  }
+
+/* brand Logo */
+
+.brand_image {
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+}
+
+.brand_text{
+    font-size: 30px;
+    color: #000;
+    font-weight: 800;
+}
+
+/* //////////////////////// */
+/*text Style */
+
+.display1 {
+    font-family: var(--main-font-family);
+    color: var(--main-text-color);
+    font-size: clamp(40px, 3.8vw, var(--display1-text-size));
+    font-weight: 700;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 5rem;
+}
+
+
+
+.display2 {
+    font-family: var(--main-font-family);
+    color: var(--main-text-color);
+    font-size: clamp(20px, 2vw, var(--display2-text-size));
+    font-weight: 700;
+    font-style: normal;
+    font-variant: normal;
+}
+
+.sideline_text {
+    font-family: var(--main-font-family);
+    color: var(--main-text-color);
+    font-size: var(--Sideline-text-size);
+    font-weight: 700;
+    font-style: normal;
+    font-variant: normal;
+}
+
+h1 {
+    font-family: var(--main-font-family);
+    color: var(--main-text-color);
+    font-size: 40px;
+    font-weight: 600;
+    font-style: normal;
+    font-variant: normal;
+    margin-bottom: 20px;
+}
+
+/* //////////////////////// */
+
+/* form General Styling */
+input {
+    background-color: var(--bg-light);
+}
+
+textarea {
+    background-color: var(--bg-light);
+}
+
+
+/* Navbar Styling */
+.navbar {
+    background-color: var(--cream-color);
+    color: var(--Wine-red);
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #000;
+    font-size: large;
+    font-weight: bold;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: var(--Wine-red);
+    font-size: large;
+    font-weight: bold;
+}
+
+/* Style for the dropdown menu */
+.dropdown-menu{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 10rem;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: var(--main-bg-color);
+    background-clip: padding-box;
+    border-radius: 3px;
+    border: none;
+  }
+  
+  @media screen and (max-width: 992px) {
+    /* CSS styles here */
+    .dropdown-menu {
+        right: -61px;
+    }
+  }
+
+  /* Style for the dropdown menu items */
+  .dropdown-menu li {
+    display: block;
+    padding: .75rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.1;
+    font-size: 15px;
+    color: black;
+    border-bottom: 1px solid #D9D9D9;
+  }
+
+  .dropdown-menu li:first-child {
+    background-color: var(--bg-wine-red);
+    color: #fff;
+    font-size: 18px;
+    padding: 1.6rem 1.8rem;
+  }
+  
+  /* Style for the dropdown menu item hover state */
+  .dropdown-menu li:hover {
+    background-color: var(--bg-dark-cream);
+  }
+
+
+  
+  /* Show the dropdown menu when the dropdown button is clicked */
+  .show {
+    display: block;
+  }
+  
+  .dropdown-item:hover{
+    background-color: var(--bg-dark-cream);
+    color: #000;
+  }
+  .dropdown-item{
+    background-color: var(--bg-dark-cream);
+    color: #000;
+  }
+/* //////////////////////// */
+
+
+/* Buttons Styling */
+.btn-primary {
+    background-color: var(--btn-wine-red);
+    border-color: var(--btn-wine-red);
+    color: var(--cream-color);
+}
+
+.btn-secondary {
+    background-color: var(--main-bg-color);
+    border-color: var(--main-bg-color);
+    color: var(--btn-wine-red);
+    font-weight: bold;
+}
+
+.btn-danger {
+    background: rgb(177, 0, 0);
+    background: -webkit-linear-gradient(rgb(255, 34, 34), rgb(179, 1, 1));
+    background: -moz-linear-gradient(rgb(255, 34, 34), rgb(141, 0, 0));
+    background: linear-gradient(rgb(252, 48, 48), rgb(141, 1, 1));
+    color: white;
+    border: none;
+}
+
+.btn-info {
+    background-color: var(--royal-blue-light);
+    background: -webkit-linear-gradient(var(--royal-blue-light), var(--royal-blue-dark));
+    background: -moz-linear-gradient(var(--royal-blue-light), var(--royal-blue-dark));
+    background: linear-gradient(var(--royal-blue-light), var(--royal-blue-dark));
+    color: white;
+    color: white;
+    border: none;
+}
+
+.btn-info:hover {
+    background: #fff;
+    color: var(--bg-royal-blue-light);
+    border: none;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: var(--btn-dark-cream-color);
+    border-color: var(--btn-dark-cream-color);
+    color: var(--Wine-red);
+    font-weight: bold;
+}
+
+.btn-secondary:hover {
+    background-color: var(--btn-orange-color);
+    border-color: var(--btn-orange-color);
+    color: #000;
+    font-weight: bold;
+}
+
+
+.btn-warning {
+    background-color: var(--btn-orange-color);
+    border-color: var(--btn-orange-color);
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-outline-primary {
+    color: var(--Wine-red);
+    border-color: var(--Wine-red);
+    font-weight: bold;
+}
+
+.btn-outline-primary:hover {
+    background-color: orange;
+    border-color: orange;
+    font-weight: bold;
+}
+
+a {
+    color: orange;
+    text-decoration: none;
+}
+
+.text-primary {
+    color: var(--Wine-red);
+}
+
+
+
+
+/* ///////////////////////////// */
+
+/* individual Nav item */
+.navbar-nav .nav-item li {
+    position: relative;
+}
+
+.navbar-nav .nav-item ul {
+    display: none;
+    list-style: none;
+    position: absolute;
+    top: 68px;
+    background-color: var(--Wine-red);
+}
+
+.navbar-nav .nav-item:hover>ul {
+    display: block;
+}
+
+/* Nav Item Sub Menu Item */
+.navbar-nav .nav-item ul li {
+    margin-bottom: 10px;
+    padding: 5px 5px 0 5px;
+}
+
+/* Nav Item Sub Menu Item Link */
+.navbar-nav .nav-item ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Nav Item Sub Menu Item Link */
+.navbar-nav .nav-item ul li:hover {
+    background: var(--cream-color);
+}
+
+.navbar-nav .nav-item ul li:hover>a {
+    color: var(--Wine-red);
+}
+
+
+
+/* /////////////////////////// */
+.box {
+    margin: auto;
+    margin-top: 60px;
+    max-width: 657px;
+    border-radius: 10px ;
+    /* border: 1px solid var(--Wine-red); */
+    box-shadow:-2px 6px 34px -7px rgb(2 8 10 / 18%);
+}
+
+
+/* hero */
+.Hero_text{
+    font-size: 90px;
+    font-weight: bold;
+    line-height: 6rem;
+    margin-top: 44px;
+}
+/* Dividers */
+
+.hr {
+    height: 6px;
+    background: var(--bg-dark-cream);
+    transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.rule {
+    background-color: var(--bg-wine-red);
+    width: 60px;
+    height: 5px;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.rule2 {
+    background-color: #fff;
+    width: 40px;
+    height: 5px;
+    border-radius: 0 2px 2px 0;
+    box-sizing: border-box;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.Trule {
+    position: relative;
+    z-index: 1;
+    background-color: var(--bg-wine-red);
+    width: 60px;
+    height: 5px;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.2);
+}
+
+.Trule2 {
+    position: relative;
+    z-index: 1;
+    background-color: #fff;
+    width: 40px;
+    height: 5px;
+    border-radius: 0 2px 2px 0;
+    box-sizing: border-box;
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.2);
+}
+
+.Nrule {
+    background-color: var(--bg-wine-red);
+    width: 60px;
+    height: 5px;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.Nrule2 {
+    background-color: #fff;
+    width: 40px;
+    height: 5px;
+    border-radius: 0 2px 2px 0;
+    box-sizing: border-box;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ////////////////////////// */
+
+
+
+
+/* footer */
+.footer {
+    background-color: var(--bg-wine-red);
+    color: #fff;
+    padding-top: 40px;
+}
+
+.footer_link {
+    margin-right: 0;
+}
+
+.footer_link .nav-link {
+    color: var(--cream-color);
+}
+
+.footer_link h5 {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: var(--main-font-family);
+}
+
+.sub_footer {
+    background-color: var(--bg-dark-wine-red);
+    color: #fff;
+}
+
+.sub_footer p {
+    font-size: 11px;
+}
+
+.footer .fa-brands {
+    color: var(--main-bg-color);
+}
+
+@media (max-width:765px) {
+    .footer_link h5 {
+        font-size: 18px;
+        font-weight: bold;
+        font-family: var(--main-font-family);
+    }
+
+    .footer_link li .nav-link {
+        font-size: 12px;
+        font-weight: bold;
+        font-family: var(--main-font-family);
+    }
+
+    .sub_footer p {
+        font-size: 10px;
+    }
+}
+
+/* ////////////////////////////////////// */
+/* Hamburger Menu Button */
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--main-bg-color);
+  position: fixed;
+  top: 84px;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  transition: all 0.3s ease-in-out;
+}
+
+
+.menu.active {
+    left: 0;
+    top: 84px;
+  }
+
+/* The main Menu */
+
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 19px;
+  height: 100%;
+  width: 100%;
+}
+
+.menu ul li {
+  font-weight: 500;
+}
+
+.menu ul li a {
+  display: block;
+  padding: 10px 5px;
+  text-decoration: none;
+  color: var(--bg-wine-red);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* /////////////////////////////// */
+/* Sub Menu  */
+
+.menu .sub-menu{
+    display: none;
+    background-color: var(--main-bg-color);
+    min-width: 200px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .menu .sub-menu.active{
+    display: block;
+    margin-left: -5px;
+    min-width: 200px;
+  }
+
+.menu ul ul li a {
+  display: block;
+  padding: 8px  15px;
+  text-decoration: none;
+  color: #000;
+  font-size: 17px;
+}
+
+/* /////////////////////////////// */
+/* hamburger styling */
+.hamburger-menu {
+  display: block;
+  cursor: pointer;
+  z-index: 999;
+  padding-right: 10px;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  margin: 5px;
+  background-color: #000;
+  transition: transform 0.2s ease-in-out;
+}
+
+.hamburger-menu.active .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-menu.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.active .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* /////////////////////////////// */
+/* the Submenu toggler (the li that produces the drop down) */
+.sub-menu-toggle{
+    cursor: pointer;
+}
+
+/* /////////////////////////////// */
+/* the Submenu icon styling and rotating */
+.sub-menu-toggle-icon {
+  cursor: pointer;
+  color: orange;
+}
+
+.sub-menu-toggle-icon .fas {
+  font-size: 16px;
+  margin-left: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.sub-menu-toggle-icon.active .fas {
+  transform: rotate(180deg);
+}
+
+/* notice Styling  */
+
+.notice {
+    display: block;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #4E0707;
+    opacity: 0.8;
+    color: #fff;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 28px 40px 2px 8vw;
+  }
+  
+  .notice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .notice-header i{
+    color: orange;
+  }
+
+  .notice-header h2 {
+    color: orange;
+    margin: 0;
+    font-size: 22px;
+  }
+  
+  .notice-body {
+    margin: 0;
+    line-height: 1.5;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+  }
+
+/* Student Access Card */
+/* dimensions scaled down to 80% */
+.student_card_container{
+    width: 898.015748px;
+    height: 1239.46px;
+    background-color: rgb(235, 235, 235);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center; /* Center along the horizontal axis */
+    align-items: center;
+    grid-auto-rows: 153.85px;
+    gap: 16px;
+    padding: 18px;
+    padding-top: 32px;
+  }
+
+  .studentcardimg{
+    width: 276.67px;
+    height: 153.85px;
+  }
+
+
+  .studentcard {
+    position: relative;
+    width: 276.67px;
+    height: 153.85px;
+  }
+  
+  .studentcardimg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  
+  .text-overlay {
+    position: absolute;
+    top: 29.527559px;
+    left: 25.793701px;
+    color: #FF9933; 
+  }
+
+  .text-overlay h1 {
+    margin: 12px;
+    font-size: 29.516px;
+    font-weight: bolder;
+  }
+  
+  .text-overlay h2 {
+    margin: 0;
+    font-size: 11.4px;
+    font-weight: 900;
+  }
+  
+  .text-overlay p {
+    margin: -1px 0;
+    font-size: 11.072px; 
+    font-weight: 700;
+  }
+  

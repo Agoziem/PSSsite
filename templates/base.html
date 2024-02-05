@@ -1,0 +1,133 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/PSS Logo.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/PSS Logo.png' %}">
+    <link rel="icon" type="image/png" sizes="48x48" href="{% static 'images/PSS Logo.png' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Result.css' %}">
+    <title>PSS Umunya</title>
+    <script>
+        var user = '{{request.user}}'
+    
+        function getToken(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+              var cookies = document.cookie.split(';');
+              for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+                }
+              }
+            }
+            return cookieValue;
+          }
+          var csrftoken = getToken('csrftoken')
+      </script>
+</head>
+<body class="position-relative d-flex flex-column min-vh-100">
+  <nav class="navbar navbar-expand-md navbar-light mt-0 fixed-top shadow-sm">
+    <div class="container px-2 d-flex justify-content-between">
+        <!-- First Part of the Nav bar -->
+
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'home' %}"><img src="{% static 'images/PSS Logo.png' %}" alt="..."
+                    class="brand_image img-fluid">
+            </a>
+            <div class="brand_text ms-3">
+                PSS Umunya
+            </div>
+        </div>
+        <div class="d-flex d-lg-none align-items-center justify-content-center">
+            <div class="nav-item-envelope me-3 position-relative">
+                <i class="fas fa-search h5 " style="color:#3b0505;"></i>
+            </div>
+            <div class="hamburger-menu ">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+
+        <!-- 2nd Part of the Nav bar -->
+        <div class="d-none d-md-flex">
+            <ol class="navbar-nav text-start ps-1">
+                <li href="{% url 'StudentsPortal:classes' %}" class="nav-item me-3 ">
+                    <a class="nav-link">
+                        Student Portal
+                    </a>
+                </li>
+                <li class="nav-item me-3 ">
+                    <a href="{% url 'TeachersPortal:Teachers_dashboard' %}" class="nav-link">
+                        Teacher Portal
+                    </a>
+                </li>
+
+                {% if request.user.is_superuser %}
+                <li class="nav-item me-3 ">
+                    
+                    <a href="{% url 'cardactivate' %}" class="nav-link">
+                        Students Card
+                    </a>
+                </li>
+                <li class="nav-item me-3 ">
+                    <a href="/admin" class="nav-link" target="_blank">
+                        Admin
+                    </a>
+                </li> 
+                 {% endif %}
+                
+            </ol>
+        </div>
+    </div>
+</nav>
+
+<!-- Navbar for Small Screen -->
+<nav class="menu">
+    <ul>
+        <li><a href="#" class="menulink">Home</a></li>
+        <li><a href="{% url 'StudentsPortal:classes' %}" class="menulink">Students Portal</a></li>
+        <li><a href="{% url 'TeachersPortal:Teachers_dashboard' %}" class="menulink">Teachers Portal</a></li>
+        <li class="sub-menu-toggle">
+            <div class="d-flex justify-content-between align-items-center">
+                <a class="me-2" class="menulink">Admin</a>
+                <i class="sub-menu-toggle-icon fas fa-plus"></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a href="/admin" target="_blank" class="menulink">Admin</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+
+    <!-- end of Navigation -->
+        {% block content%}
+        {% endblock %}
+    <!-- Footer -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+  crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+/* *{
+    background-color: black;
+} */
+
+
+.share-btn-container {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.share-btn-container a i {
+  font-size: 25px;
+}
+
+.share-btn-container a {
+  margin: 12px 0;
+  transition: 500ms;
+}
+
+.share-btn-container a:hover {
+  transform: scale(1.2);
+}
+
+.share-btn-container .fa-facebook {
+  color: #3b5998;
+}
+
+.share-btn-container .fa-twitter {
+  color: #1da1f2;
+}
+
+.share-btn-container .fa-linkedin {
+  color: #0077b5;
+}
+
+.share-btn-container .fa-pinterest {
+  color: #bd081c;
+}
+
+.share-btn-container .fa-whatsapp {
+  color: #25d366;
+}
+
+/* Media Queries */
+@media (max-width: 550px) {
+  .content {
+    padding: 8px 32px;
+  }
+
+  .share-btn-container {
+    transform: unset;
+    top: unset;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    flex-direction: row;
+    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.3);
+    padding: 16px 0;
+    justify-content: center;
+  }
+
+  .share-btn-container a {
+    margin: 0 10px;
+  }
+}
+
+
+
+.navbar-toggler {
+  padding: 1px 5px;
+  font-size: 18px;
+}
+
+.nav-link {
+  transition: all ease-out;
+}
+
+
+
+#design {
+  border-left-style: solid;
+  border-width: medium;
+  border-color: #e60000;
+}
+
+
+#aboutcover {
+  width: 100%;
+  height: 250px;
+  /* background: #00072B; */
+  margin-bottom: 20px;
+  position: relative;
+  background-image: url('../About Cover.jpg');
+  background-position: top center;
+  background-size: cover;
+}
+
+#aboutcover::before {
+  content: '';
+  position: absolute;
+  background-color: #000;
+  opacity: 0.4;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#aboutwrapper {
+  position: relative;
+  z-index: 1;
+  top: 50%;
+  padding: 0 80px;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+#aboutcover-text {
+  color: #fff;
+  font-size: 55px;
+  font-family: var(--main-font-family);
+  line-height: 49px;
+  font-weight: 700;
+  font-style: normal;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+  margin-bottom: 9px;
+}
+
+
+@media only screen and (max-width:767px) {
+  .w-100 {
+    height: 100%;
+  }
+
+  #aboutcover-text {
+    font-size: 45px;
+  }
+  
+}
+
+#Resultboard {
+  background: url('..images/Result Cover.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+#Resultboard::before {
+  content: '';
+  position: absolute;
+  background-color: #000;
+  opacity: 0.7;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#Ass-text {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+}
+
+.text {
+  padding: 0 20px 20px;
+}
+
+.text>.icons {
+  color: gray;
+}
+
+#teacherscover {
+  width: 100%;
+  height: 250px;
+  /* background: #00072B; */
+  margin-bottom: 20px;
+  position: relative;
+  background-image: url('../Teachers.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+#teacherscover::before {
+  content: '';
+  position: absolute;
+  background-color: #000;
+  opacity: 0.5;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#teacherswrapper {
+  position: relative;
+  z-index: 1;
+  top: 50%;
+  padding: 0 80px;
+  transform: translateY(-50%);
+  text-align: center;
+}

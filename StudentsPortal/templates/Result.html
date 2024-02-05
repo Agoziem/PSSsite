@@ -1,0 +1,363 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/PSS Logo.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/PSS Logo.png' %}">
+  <link rel="icon" type="image/png" sizes="48x48" href="{% static 'images/PSS Logo.png' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://use.typekit.net/oov2wcw.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/Home.css' %}">
+  <link rel="stylesheet" href="{% static 'css/Result.css' %}">
+  <title>PSS Umunya</title>
+  <script>
+    var user = '{{request.user}}'
+
+    function getToken(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+          var cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+    var csrftoken = getToken('csrftoken')
+  </script>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-light mt-0 fixed-top shadow-sm">
+    <div class="container px-2 d-flex justify-content-between">
+        <!-- First Part of the Nav bar -->
+
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'home' %}"><img src="{% static 'images/PSS Logo.png' %}" alt="..."
+                    class="brand_image img-fluid">
+            </a>
+            <div class="brand_text ms-3">
+                PSS Umunya
+            </div>
+        </div>
+        <div class="d-flex d-lg-none align-items-center justify-content-center">
+            <div class="nav-item-envelope me-3 position-relative">
+                <i class="fas fa-search h5 " style="color:#3b0505;"></i>
+            </div>
+            <div class="hamburger-menu ">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+
+        <!-- 2nd Part of the Nav bar -->
+        <div class="d-none d-md-flex">
+            <ol class="navbar-nav text-start ps-1">
+                <li href="" class="nav-item me-3 ">
+                    <a class="nav-link">
+                        Student Portal
+                    </a>
+                </li>
+                <li class="nav-item me-3 ">
+                    <a href="" class="nav-link">
+                        Teacher Portal
+                    </a>
+                </li>
+
+                {% if request.user.is_superuser %}
+                <li class="nav-item me-3 ">
+                    
+                    <a href="{% url 'cardactivate' %}" class="nav-link">
+                        Students Card
+                    </a>
+                </li>
+                <li class="nav-item me-3 ">
+                    <a href="/admin" class="nav-link" target="_blank">
+                        Admin
+                    </a>
+                </li> 
+                 {% endif %}
+                
+            </ol>
+        </div>
+    </div>
+</nav>
+
+<!-- Navbar for Small Screen -->
+<nav class="menu">
+    <ul>
+        <li><a href="#" class="menulink">Home</a></li>
+        <li><a href="" class="menulink">Students Portal</a></li>
+        <li><a href="" class="menulink">Teachers Portal</a></li>
+        <li class="sub-menu-toggle">
+            <div class="d-flex justify-content-between align-items-center">
+                <a class="me-2" class="menulink">Admin</a>
+                <i class="sub-menu-toggle-icon fas fa-plus"></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a href="/admin" target="_blank" class="menulink">Admin</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+
+<input id="labels" type="text" value="{{labels}}" hidden>
+<input id="data" type="text" value="{{data}}" hidden>
+  <!-- print  ///////////////////////////////////////////////////////////////////// -->
+  <div id="container_result">
+
+    <!-- The School Logo -->
+    <section class="mt-4">
+      <div class="d-flex justify-content-center">
+        <img src="{% static 'images/PSS Logo.png' %}" alt="..." class="schoollogo img-fluid">
+      </div>
+    </section>
+
+     <!-- The School Name and Result details -->
+    <section class="px-2 pt-2">
+      <div class="text-center  mb-0">
+        <h4>Progressive Secondary School Umunya (Termly Result)</h4>
+        <h1>{{student_details.student_name}}</h1>
+        <div class="multiplerule my-3 d-flex justify-content-center">
+          <div class="rule"></div>
+          <div class="rule2"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Result details -->
+    <section class="details_container">
+      <div class="details container p-4 rounded d-flex">
+        <div>
+          <span class="fw-bold">Class :</span> {{ student_details.student_class }}<br>
+          <span class="fw-bold">Term : {{ Result_details.Term }} </span><br>
+          <span class="fw-bold">Session :</span> {{ Result_details.AcademicSession }}<br>
+          <span class="fw-bold">Total score :</span> {{ Result_details.TotalScore }}<br>
+        </div>
+        <div class="ms-5">
+          <span class="fw-bold">Average :</span> {{ Result_details.Average|floatformat:2 }}<br>
+          <span class="fw-bold">Position :</span> {{ Result_details.Position }}<br>
+          <span class="fw-bold">Number in Class :</span> {{ Result_details.Totalnumber }}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Result tables -->
+    <section class="px-3 pt-2">
+      <div class="result_table">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">S/N</th>
+              <th scope="col">Subjects </th>
+              <th scope="col">Test (5)</th>
+              <th scope="col">Project (5)</th>
+              <th scope="col">Mid Term Test (20)</th>
+              <th scope="col">Ass (5)</th>
+              <th scope="col">Note (5)</th>
+              <th scope="col">CA (40)</th>
+              <th scope="col">Exam (60)</th>
+              <th scope="col">Total (100)</th>
+              <th scope="col">Grade</th>
+              <th scope="col">Position</th>
+              <th scope="col">Remark</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in Results %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{data.Subject}}</td>
+              <td>{{data.FirstTest}}</td>
+              <td>{{data.FirstAss}}</td>
+              <td>{{data.MidTermTest}}</td>
+              <td> {{data.SecondAss}}</td>
+              <td>{{data.SecondTest}}</td>
+              <td> {{data.CA}}</td>
+              <td> {{data.Exam}}</td>
+              <td>{{data.Total}}</td>
+              <td>{{data.Grade}}</td>
+              <td>{{data.SubjectPosition}}</td>
+              <td>{{data.Remark}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+    <!-- Charts & BarCode -->
+    <section class="p-4">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md d-flex justify-content-end ">
+          <div>
+            <canvas id="mybarChart" style="max-width: 450px; height: 300px;"></canvas>
+          </div>
+        </div>
+        <div class="col-md d-flex justify-content-center">
+          <div>
+            <img src="{% static 'images/Result_QRCode.png' %}" style="max-width:180px;" alt="">
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- Annual Results Starts here ///////////////////////////////////////-->
+
+    {% if Annual_Result %}
+
+    <section class="px-2 pt-2">
+      <div class=" text-center  mb-0">
+        <h1 class=" fw-normal">Annual Result </h1>
+        <div class="multiplerule my-3 d-flex justify-content-center">
+          <div class="rule"></div>
+          <div class="rule2"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="details_container">
+      <div class="details container p-4 rounded d-flex">
+        <div>
+          <span class="fw-bold">Class :</span> {{ student_details.student_class }}<br>
+          <span class="fw-bold">Term :</span> {{ AnnualStudent.Term }}<br>
+          <span class="fw-bold">Session :</span> {{ AnnualStudent.Academicsession }}<br>
+          <span class="fw-bold">Total score :</span> {{ AnnualStudent.TotalScore|floatformat:2 }}<br>
+          <span class="fw-bold">Average :</span> {{ AnnualStudent.Average|floatformat:2 }}<br>
+          <span class="fw-bold">Position :</span> {{ AnnualStudent.Position }}<br>
+          <span class="fw-bold">Number in Class :</span> {{ AnnualStudent.Totalnumber }}<br>
+          <span class="fw-bold">Principal's Verdict :</span>
+
+          {% if student_details.Class == "SS1A" or student_details.Class == "SS1B" or student_details.Class == "SS1C" or student_details.Class == "SS2A" or student_details.Class == "SS2B" %}
+            {% if PromotionVerdict >= 50 %}
+            Promoted
+            {% else %}
+            Not Promoted
+            {% endif %}
+          {% else %}
+            {% if PromotionVerdict >= 45 %}
+            Promoted
+            {% else %}
+            Not Promoted
+            {% endif %}
+         {% endif %}
+        </div>
+      </div>
+    </section>
+
+    <section class="px-3 pt-2">
+      <div class="result_table">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">S/N</th>
+              <th scope="col">Subjects</th>
+              <th scope="col">1st Term</th>
+              <th scope="col">2nd Term</th>
+              <th scope="col">3rd Term</th>
+              <th scope="col">Total</th>
+              <th scope="col">Average</th>
+              <th scope="col">Grade</th>
+              <th scope="col">Position</th>
+              <th scope="col">Remark</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in AnnualResult %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{data.Subject}}</td>
+              <td>{{data.FirstTerm}}</td>
+              <td>{{data.SecondTerm}}</td>
+              <td>{{data.ThirdTerm}}</td>
+              <td>{{data.Total|floatformat}} </td>
+              <td>{{data.Average|floatformat:2}}</td>
+              <td>{{data.Grade}}</td>
+              <td>{{data.SubjectPosition}}</td>
+              <td>{{data.Remark}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+    
+  {% endif %}
+
+
+  </div>
+  <!--end of print ////////////////////////////////////////////////////////////// -->
+
+  <section class=" ms-5 my-3 ">
+    <div class="container px-2 px-md-5  mb-5">
+
+      {% if isTermNewsletter %}
+        <a href="{{ TermNewsletter.NewsletterURL }}" class="btn btn-outline-primary"
+          download="{{ TermNewsletter.NewsletterURL }}">
+          {{ TermNewsletter.currentTerm.term }} Newsletter
+          <i class="bi bi-download ms-2"></i>
+        </a>
+        {% endif %}
+
+
+      <a id="result_btn" class="btn btn-primary">
+        Save as Pdf
+        <span class="spinner-border spinner-border-sm d-none ms-1" role="status" aria-hidden="true"></span>
+      </a>
+
+      <a id="redgrad2" href="{% url 'home' %}" class="btn btn-info"> Back to Home
+        <i class="fa fa-house ms-1"></i>
+      </a>
+    </div>
+  </section>
+
+  <footer  class="footer">
+    <div>
+        <p class="small text-center">
+            <a href="" target="_blank"><i class="fab fa-instagram text-secondary h1 mx-2"></i></a>
+            <a href="" target="_blank"><i class="fab fa-facebook text-secondary h1 mx-1"></i></a>
+        </p>
+    </div>
+    <div class="sub_footer d-flex justify-content-center align-items-center py-3">
+        <div>
+            <p class="my-0 text-center">&copy; 2023 PSS Umunya, inst . All rights reserved.</p>
+            <p class="my-0 text-center">designed by GDD Impact</p>
+        </div>
+
+    </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <script src="{% static 'js/Student_Portal/result.js' %}"></script>
+</body>
+
+</html>

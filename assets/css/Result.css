@@ -1,0 +1,177 @@
+#Resultcover {
+    width: 100%;
+    height: 250px;
+    /* background: #00072B; */
+    margin-bottom: 20px;
+    position: relative;
+    background-image: url('../images/Teachers_Login2.jpg');
+    background-position: bottom;
+    background-size: cover;
+  }
+  
+  #Resultcover::before {
+    content: '';
+    position: absolute;
+    background-color: #000;
+    opacity: 0.5;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  #Resultcover-text {
+    color: #fff;
+    font-size: 60px;
+    font-family: var(--main-font-family);
+    line-height: 68px;
+    font-weight: 700;
+    font-style: normal;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+  }
+  
+  @media (max-width:768px) {
+    #Resultcover-text {
+        font-size: 45px;
+        font-family: var(--main-font-family);
+        line-height: 45px;
+        font-weight: 700;
+        font-style: normal;
+        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+      }
+}
+  #Elibrarywrapper {
+    position: relative;
+    z-index: 1;
+    top: 50%;
+    padding: 0 80px;
+    transform: translateY(-50%);
+    text-align: center;
+  }
+.Resultboard{
+    background-color: var(--bg-dark-cream);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Resultboard input{
+    background-color: var(--bg-light);
+}
+
+.Resultboard select{
+    background-color: var(--bg-light);
+}
+.result_logo{
+    width: 120px;
+    height: 120px;
+}
+
+#ResultCard{
+    box-shadow: 3.81681px 3.81681px 3.81681px rgba(0, 0, 0, 0.25);
+    max-width: 350px;
+}
+
+  /* instuction */ 
+
+  .instruction .bi-check-circle-fill{
+    color: var(--btn-orange-color);
+  }
+
+  .class_board{
+    background-color: var(--bg-dark-cream);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .class_board select{
+    background-color: var(--main-bg-color);
+    border: none;
+    outline: none;
+}
+
+#ResultCard{
+    background-color: var(--main-bg-color);
+}
+
+
+#news {
+    margin-top: 200px;
+}
+
+#headers {
+    text-align: center;
+}
+
+
+.result_table table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+    color: #4a4a4d;
+    font: 14px/1.4 'League Spartan', 'sans-serif';
+    margin: 30px auto;
+    max-width: 100%;
+}
+
+.result_table th,
+td {
+    padding: 10px 15px;
+    vertical-align: middle;
+}
+
+
+.result_table thead th{
+    background: orange;
+    background: -webkit-linear-gradient(orange, rgb(151, 100, 4));
+    background: -moz-linear-gradient(orange, rgb(151, 100, 4));
+    background: linear-gradient(orange, rgb(151, 100, 4));
+    color: #fff;
+    font-size: 14px;
+    text-align: start;
+}
+
+.result_table th:first-child {
+    border-top-left-radius: 5px;
+    text-align: left;
+}
+
+.result_table th:last-child {
+    border-top-right-radius: 5px;
+}
+
+.result_table tbody tr:nth-child(even) {
+    background-color: var(--bg-light);
+}
+
+.result_table td {
+    border-right: 2px solid var(--bg-dark-cream);
+    border-bottom: 2px solid var(--bg-dark-cream);
+}
+
+.result_table td:first-child {
+    border-left: 2px solid var(--bg-dark-cream);
+}
+
+
+.schoollogo {  
+    width: 120px;
+    height: 120px;
+}
+
+/* 
+#details {
+    background-color: ;
+    border-left: #e60000 3px solid;
+} */
+
+.details_container{
+padding: 0 250px 0 250px; 
+}
+
+.details{
+    background-color: var(--bg-light);
+    border-left: #011B4D 4px solid;
+}

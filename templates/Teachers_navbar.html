@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/PSS Logo.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/PSS Logo.png' %}">
+    <link rel="icon" type="image/png" sizes="48x48" href="{% static 'images/PSS Logo.png' %}">
+    <title>Teachers Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/oov2wcw.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <link href="{% static 'css/Teachers_portal/styles.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/Teachers_portal/Teachers_portal.css' %}">
+    <script>
+        var user = '{{request.user}}'
+
+        function getToken(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getToken('csrftoken')
+    </script>
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="{% url 'TeachersPortal:Teachers_dashboard' %}"><img src="{% static 'images/PSS Logo.png' %}" alt="..."
+                    class="brand_image img-fluid me-2">PSS Umunya</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+                class="fas fa-bars"></i></button>
+
+        <!-- Small screen Search button -->
+        <div class=" d-block d-md-none navbar-search me-3 position-relative">
+            <i class="fas fa-search" style="color: white;"></i>
+        </div>
+
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-3 my-md-4">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
+                    aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-warning text-light " id="btnNavbarSearch" type="button"><i
+                        class="fas fa-search"></i></button>
+            </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'TeachersPortal:profile' id=request.user.teacher.id %}">Profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'home' %}">Back to HomePage</a></li>
+                    <li><a class="dropdown-item" href="#!">Activity log</a></li>
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
+                    <li><a class="dropdown-item" href="{% url 'Accounts:logout'  %}">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <a class="nav-link" href="{% url 'TeachersPortal:Teachers_dashboard' %}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Teachers Dashboard
+                        </a>
+                        <div class="sb-sidenav-menu-heading">SECTIONS</div>
+                        <!-- Students Result Section -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Students Results
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                {% for class in request.user.teacher.classes_taught.all %}
+                                <a class="nav-link" href="{% url 'TeachersPortal:result_computation' Classname=class.Class id=request.user.teacher.id %}">{{ class.Class }}</a>
+                                {% endfor %}
+                            </nav>
+                        </div>
+
+        
+
+                        {% if request.user.teacher.Role == 'Formteacher' %}
+                        <div class="sb-sidenav-menu-heading">FORM TEACHER {{ request.user.teacher.classFormed }}</div>
+                        <a class="nav-link" href="{% url 'TeachersPortal:Students' Classname=request.user.teacher.classFormed %}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                            View Students
+                        </a>
+                        <a class="nav-link" href="{% url 'TeachersPortal:PublishResults' Classname=request.user.teacher.classFormed %}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></i></div>
+                            Publish Result
+                        </a>
+                        {% endif %}
+                        <a class="nav-link" href="{% url 'TeachersPortal:profile' id=request.user.teacher.id %}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-solid fa-user"></i></div>
+                             Profile
+                        </a>
+                        <a class="nav-link" href="{% url 'Accounts:logout'  %}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-solid fa-right-from-bracket fa-flip-horizontal"></i></div>
+                            log out
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    {{ request.user }}
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+            {% block content%}
+            {% endblock %}
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; PSS Umunya 2023</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>  
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'js/Teacher_portal/scripts.js' %}"></script>
+    
+</body>
+
+</html>

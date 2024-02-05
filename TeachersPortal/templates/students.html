@@ -1,0 +1,225 @@
+{% extends 'Teachers_navbar.html' %}
+{% load static %}
+{% block content%}
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+<style>
+
+.datatable-top, .datatable-bottom {
+    padding: 10px 10px;
+}
+
+.datatable-selector {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.datatable-selector:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.datatable-input {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.datatable-input:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+
+/* Bootstrap table-striped styling */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(229, 213, 181, .19);
+}
+
+
+</style>
+<section class="py-2 ">
+    <nav class="ms-4 mt-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'TeachersPortal:Teachers_dashboard' %}">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ class.Class }} Students</li>
+        </ol>
+    </nav>
+    <hr>
+    <input type="text" id="studentclass" value="{{ class.Class }}" hidden>
+    <div class="container-fluid px-4">
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <h1 class="mt-4">{{ class.Class }} Students</h1>
+                <ol class="breadcrumb mb-2">
+                    {% if teacher.FirstName == "None" %}
+                    <div><a href="{% url 'TeachersPortal:profile' teacher.id %}" class="text-decoration-none"> edit your Teachers Profile to perform futher Action </a></div>
+                    {% else %}
+                    <li class="breadcrumb-item active">Welcome Form-Teacher {{ request.user }}</li>
+                    {% endif %}  
+                </ol>
+            </div>
+                    
+            <div class="row justify-content-between mt-3 datacard px-2 px-md-5">
+                <div class="col-md-8  mb-4 p-0">
+                    <div class="card">
+                        <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        {{ class.Class }} Students info Table
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" id="datatablesSimple" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th><i class="fa-solid fa-users"></i></th>
+                                            <th>Student name</th>
+                                            <th>Student id</th>
+                                            <th>Sex</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th><i class="fa-solid fa-users"></i></th>
+                                            <th>Student name</th>
+                                            <th>Student id</th>
+                                            <th>Sex</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for student in students %}
+                                        <tr>
+                                            <td class="id"><input class="form-check-input me-3" type="checkbox" value="{{ student.id }}" id="selectstudentcheckbox"></td>
+                                            <td class="name"><a class="editstudentinfo text-decoration-none" style="cursor:pointer">{{ student.student_name }}</a></td>
+                                            <td class="studentID">{{ student.student_id }}</td>
+                                            <td class="sex">{{ student.Sex }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-3 ActionButtons mb-3 mb-md-0 p-2">
+                    <div class=" my-2 mb-3 d-flex flex-column justify-content-center align-items-center">
+                        <div class="alertcontainer mb-2">
+                        </div>
+                        <button id="addstudentbtn" type="button" class="w-100 btn btn-success text-light mb-3" data-bs-toggle="modal" data-bs-target="#AddandeditStudentModal"><i class="fa-solid fa-plus me-2"></i>Add Student</button>
+                        <button id="removestudentsactionbtn" type="button" class="w-100 btn btn-secondary text-light mb-5" data-bs-toggle="modal" data-bs-target="#deletestudentModal"><i class="fa-solid fa-trash-can me-2"></i></i> delete selected</button>
+                        <div id="removeallstudentactionbtn" class="w-100 p-2 pt-3 px-3 bg-light d-flex justify-content-center">
+                            <button type="button" class="w-100 btn btn-danger text-light mb-2" data-bs-toggle="modal" data-bs-target="#deleteallstudentModal"><i class="fa-solid fa-trash-can me-2"></i></i> delete All </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Adding new Students -->
+        <div class="modal fade" id="AddandeditStudentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title fs-5" id="AddandeditStudentModalLabel">Add Student Record</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addandeditstudentdetailform" class="p-4 pb-5 needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="student_name" class="form-label">Full name</label>
+                            <input type="text" class="form-control" id="student_name" placeholder="Surname first" required>
+                            <div class="valid-feedback">
+                            Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                input Student name 
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Student_sex" class="form-label">Sex</label>
+                            <input type="text" class="form-control" id="Student_sex" placeholder="example Male" required>
+                            <div class="valid-feedback">
+                            Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                input Student's Gender
+                            </div>
+                        </div>
+                        <div class="mb-3 d-flex justify-content-end">
+                            <button id="mainsubmitbtn" type="submit" class="btn btn-success me-3">
+                                Add Student 
+                                <span class="spinner-border spinner-border-sm d-none ms-1" role="status" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                        
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- deleting Students -->
+        <div class="modal fade" id="deletestudentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirmation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <span>are you sure you want delete the Selected Students Record</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="deletestudentbtn" type="button" class="btn btn-danger">Delete</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- deleting all Student -->
+        <div class="modal fade" id="deleteallstudentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirmation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <i class="fa-solid fa-triangle-exclamation me-3 h5 text-danger"></i><span>are you sure you want delete all the Students Records</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="deleteallstudentbtn" type="button" class="btn btn-danger">Delete</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+</section>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<script src="{% static 'js/Teacher_portal/students_view.js' %}"></script>
+{% endblock %}

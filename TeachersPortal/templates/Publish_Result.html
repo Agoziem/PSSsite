@@ -1,0 +1,190 @@
+{% extends 'Teachers_navbar.html' %}
+{% load static %}
+{% block content%}
+<style>
+    .datatable-top,
+    .datatable-bottom {
+        padding: 10px 10px;
+    }
+
+    .datatable-selector {
+        display: block;
+        width: 100%;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .datatable-selector:focus {
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .datatable-input {
+        display: block;
+        width: 100%;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .datatable-input:focus {
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .table-bordered {
+        border: 1px solid #dee2e6;
+    }
+
+
+    /* Bootstrap table-striped styling */
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(229, 213, 181, .19);
+    }
+</style>
+<section class="pt-4 pb-5">
+    <nav class="ms-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'TeachersPortal:Teachers_dashboard' %}">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Result Analytics</li>
+        </ol>
+    </nav>
+    <hr>
+    <div class="container-fluid px-4 px-md-2">
+        <div class="d-flex flex-column align-items-center justify-content-center">
+            <h1 class="mt-2">Result Publishing</h1>
+            <ol class="breadcrumb mb-4">
+                {% if teacher.FirstName == "None" %}
+                <div><a href="{% url 'TeachersPortal:profile' teacher.id %}" class="text-decoration-none"> edit your
+                        Teachers Profile to perform futher Action </a></div>
+                {% else %}
+                <li class="breadcrumb-item active">{{ class.Class }} Students Result Table</li>
+                <input  class="classinput" type="text" value="{{ class.Class }}" hidden>
+                <input  class="subjectlist" type="text" value="{{ sub_list }}" hidden>
+                {% endif %}
+            </ol>
+        </div>
+        <div class="row justify-content-center">  
+            <div class="col-md-8 ">
+                <div class="card px-4 py-4 pb-2 me-0 me-md-4">
+                    <!-- Table Header -->
+                    <div class="table-header row align-item-center justify-content-between mb-4">
+                        <div class="col-md-3 mb-3 mb-md-0">
+                            <select id="lengthSelect" class="form-select" aria-label="Default select example">
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                            </select>
+                            <p class="fw-bold mt-2">students per page</p>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="filterInput" placeholder="Search....">
+                        </div>
+                    </div>
+                    <!-- The Main Table -->
+                    <div class="table-responsive table-main">
+                        <table id="dataTable" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">S/N</th>
+                                    <th id="tableHeader" scope="col">Name<i class="fa-solid fa-arrow-up-z-a ms-2"></i></th>
+                                    {% for sub in subjects_allocation.subjects.all %}
+                                    <th data-index="{{ forloop.counter }}" scope="col" class="text-uppercase">{{ sub.subject_code }}</th>
+                                    {% endfor %}
+                                    <th scope="col">TOTAL</th>
+                                    <th scope="col">AVE</th>
+                                    <th scope="col">GRADE</th>
+                                    <th scope="col">POSITION</th>
+                                    <th scope="col">REMARK</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <!-- Table Footer -->
+                    <div class=" table-footer row align-items-center justify-content-between pb-2">
+                        <div class="col-md-4 mb-4 m-md-0">
+                            <div class="pagination-literal">
+            
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+        
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 pt-3 pt-md-0">
+                <div class="mb-3">
+                    <label for="academicSessionSelect">Academic Session:</label>
+                    <select id="academicSessionSelect" name="AcademicSession" class="form-select" required>
+                        {% for Session in academic_session %}
+                        <option value="{{ Session.session }}">{{ Session.session }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-4">
+                     <label for="termSelect">Term:</label>
+                    <select id="termSelect" name="Term" class="form-select" required>
+                        {% for Term in Terms %}
+                        <option value="{{ Term.term }}">{{ Term.term }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="alertcontainer mb-2">
+                </div>
+                <button id="publishbtn" class="btn btn-primary w-100 mb-3 shadow-sm">Publish Result <i
+                        class="fa-solid fa-right-from-bracket ms-2"></i></button>
+                <button class="btn btn-success w-100 mb-3 shadow-sm">Print to Excel <i
+                        class="fa-solid fa-file-excel ms-2"></i></button>
+                <button class="btn btn-secondary w-100 shadow-sm" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Hide/Show Columns
+                </button>
+                <div class="my-3 collapse" id="collapseExample">
+                    <!-- this has to be dyamic as well -->
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-secondary">
+                            <input class="form-check-input me-2" type="checkbox" value="" id="UnhideAllCheckbox">
+                            <label class="form-check-label" for="UnhideAllCheckbox"> hide All Subjects</label>
+                        </li>
+                        {% for sub in subjects_allocation.subjects.all %}
+                        <li class="list-group-item">
+                            <input class="form-check-input me-2 column-checkbox" type="checkbox" value="{{ forloop.counter }}" id="{{ forloop.counter }}Checkbox">
+                            <label class="form-check-label" for="{{ forloop.counter }}Checkbox"><span class="text-primary">{{ sub.subject_code }}:</span> {{ sub.subject_name }}</label>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/Teacher_portal/publish_Result.js' %}"></script>
+{% endblock %}
