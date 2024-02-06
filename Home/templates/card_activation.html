@@ -1,7 +1,73 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content%}
-<div>
-    Student Card Activation
-</div>
+<section class=" py-4 d-flex flex-column align-items-center">
+    <!-- GPLA Card Front -->
+    <div class="d-flex mb-4 align-items-center">
+        <h3>PSS Umunya Students Card (Front)</h3>
+        <button id="download_btn" class="btn btn-primary ms-5">download Cards
+            <span class="spinner-border spinner-border-sm d-none ms-1" role="status" aria-hidden="true"></span>
+        </button>
+    </div>
+    <div id="student_card_container" class="student_card_container">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt="">
+        <img class="studentcardimg" src="{% static 'images/PSS Front Card.png' %}" alt=""> 
+    </div>
+
+    <!-- GPLA Card Back -->
+    <div class="d-flex my-5 align-items-center">
+        <h3>GPL Academy Students Card (Back)</h3>
+        <div class="ms-3">
+            {% if students.has_previous %}
+            <a href="?page=1">&laquo First</a>
+            <a href="?page={{ students.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            page <span class="fw-bold">{{ students.number }}</span> of <span class="fw-bold">{{ students.paginator.num_pages }}</span>
+
+            {% if students.has_next %}
+            <a class="me-2" href="?page={{ students.next_page_number }}">Next</a>
+            <a class="me-2" href="?page={{ students.paginator.num_pages }}">Last &raquo</a>
+            {% endif %}
+        </div>
+        <button id="download_back_btn" class="btn btn-primary ms-5">download Cards 
+            <span class="spinner-border spinner-border-sm d-none ms-1" role="status" aria-hidden="true"></span>
+        </button>
+    </div>
+    <div id="student_card_back_container" class="student_card_container">
+        {% for student in students %}
+        <div class="studentcard">
+            <img class="studentcardimg" src="{% static 'images/PSS Back Card.png' %}" alt="">
+            <div class="text-overlay">
+                <h1>{{ student.student_class }}</h1>
+                <h2>{{ student.student_name }}</h2>
+                <p>{{ student.student_id }}</p>
+                <p>{{ student.student_pin }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+</section>
+<script src="{% static 'js/Access_cards.js' %}"></script>
 {% endblock %}
