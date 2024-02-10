@@ -55,7 +55,7 @@ download_back_btn.addEventListener('click', () => {
         var opt =
         {
             margin: [0,0],
-            filename: 'SMSS Access Cards' + '.pdf',
+            filename: 'PSS Access Cards' + '.pdf',
             image: { type: 'jpeg', quality: 1 },
             html2canvas: { 
               scale: 5,
