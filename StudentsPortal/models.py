@@ -82,7 +82,7 @@ class Students_Pin_and_ID(models.Model):
 				self.student_name = ' '.join(names)
 				random_pin = str(random.randint(1000, 9999))
 				random_14_digit = str(random.randint(10**13, 10**14 - 1))
-				student_id = f"smss/{random_pin}"
+				student_id = f"pss/{random_pin}"
 				object_with_similar_student_id = Students_Pin_and_ID.objects.filter(student_id=student_id,student_pin=random_14_digit)
 				if not object_with_similar_student_id:
 					self.student_id = student_id

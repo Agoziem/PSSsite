@@ -44,7 +44,7 @@ class Teacher(models.Model):
 			while not self.teachers_id:
 				random_pin = str(random.randint(1000, 9999))
 				# random_password = secrets.token_urlsafe(8)
-				Application_id = f"teacher/smss/{random_pin}"
+				Application_id = f"teacher/pss/{random_pin}"
 				object_with_similar_Application_id = Teacher.objects.filter(teachers_id=random_pin)
 				if not object_with_similar_Application_id:
 					self.teachers_id = Application_id
