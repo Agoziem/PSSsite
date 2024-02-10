@@ -62,7 +62,6 @@ download_back_btn.addEventListener('click', () => {
               width: element.offsetWidth,
               height: element.offsetHeight,
               useCORS: true,
-              allowTaint: true,
             },
             jsPDF: { unit: 'px', format: [element.offsetWidth, element.offsetHeight], orientation: 'Portrait', hotfixes : ["px_scaling"] }
         };
