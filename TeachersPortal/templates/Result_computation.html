@@ -152,19 +152,23 @@
                                 </li>
                                 <li class="list-group-item">
                                     <input class="form-check-input me-2 column-checkbox" type="checkbox" value="4" id="fouthcheckbox">
-                                    <label class="form-check-label" for="fouthcheckbox">Second Test</label>
+                                    <label class="form-check-label" for="fouthcheckbox">Project</label>
                                 </li>
                                 <li class="list-group-item">
                                     <input class="form-check-input me-2 column-checkbox" type="checkbox" value="5" id="fifthcheckbox">
-                                    <label class="form-check-label" for="fifthcheckbox">Second Ass</label>
+                                    <label class="form-check-label" for="fifthcheckbox">Second Test</label>
                                 </li>
                                 <li class="list-group-item">
                                     <input class="form-check-input me-2 column-checkbox" type="checkbox" value="6" id="sixthcheckbox">
-                                    <label class="form-check-label" for="sixthcheckbox">CA</label>
+                                    <label class="form-check-label" for="sixthcheckbox">Second Ass</label>
                                 </li>
                                 <li class="list-group-item">
                                     <input class="form-check-input me-2 column-checkbox" type="checkbox" value="7" id="seventhcheckbox">
-                                    <label class="form-check-label" for="seventhcheckbox">Exam</label>
+                                    <label class="form-check-label" for="seventhcheckbox">CA</label>
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-2 column-checkbox" type="checkbox" value="8" id="eigthcheckbox">
+                                    <label class="form-check-label" for="eigthcheckbox">Exam</label>
                                 </li>
                             </ul>
                         </div>
@@ -201,10 +205,11 @@
                                         <th data-index="1" scope="col">FT</th>
                                         <th data-index="2" scope="col">FA</th>
                                         <th data-index="3" scope="col">MTT</th>
-                                        <th data-index="4" scope="col">ST</th>
-                                        <th data-index="5" scope="col">SA</th>
-                                        <th data-index="6" scope="col">CA</th>
-                                        <th data-index="7" scope="col">Exam</th>
+                                        <th data-index="4" scope="col">PRO</th>
+                                        <th data-index="5" scope="col">ST</th>
+                                        <th data-index="6" scope="col">SA</th>
+                                        <th data-index="7" scope="col">CA</th>
+                                        <th data-index="8" scope="col">Exam</th>
                                         <th scope="col">Total</th>
                                         <th scope="col">Grade</th>
                                         <th scope="col">Position</th>
@@ -280,19 +285,23 @@
                             </li>
                             <li class="list-group-item">
                                 <input class="form-check-input me-2 column-checkbox" type="checkbox" value="4" id="fouthcheckbox">
-                                <label class="form-check-label" for="fouthcheckbox">Second Test</label>
+                                <label class="form-check-label" for="fouthcheckbox">Project</label>
                             </li>
                             <li class="list-group-item">
                                 <input class="form-check-input me-2 column-checkbox" type="checkbox" value="5" id="fifthcheckbox">
-                                <label class="form-check-label" for="fifthcheckbox">Second Ass</label>
+                                <label class="form-check-label" for="fifthcheckbox">Second Test</label>
                             </li>
                             <li class="list-group-item">
                                 <input class="form-check-input me-2 column-checkbox" type="checkbox" value="6" id="sixthcheckbox">
-                                <label class="form-check-label" for="sixthcheckbox">CA</label>
+                                <label class="form-check-label" for="sixthcheckbox">Second Ass</label>
                             </li>
                             <li class="list-group-item">
                                 <input class="form-check-input me-2 column-checkbox" type="checkbox" value="7" id="seventhcheckbox">
-                                <label class="form-check-label" for="seventhcheckbox">Exam</label>
+                                <label class="form-check-label" for="seventhcheckbox">CA</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input class="form-check-input me-2 column-checkbox" type="checkbox" value="8" id="eighthcheckbox">
+                                <label class="form-check-label" for="eighthcheckbox">Exam</label>
                             </li>
                         </ul>
                     </div>
@@ -317,7 +326,6 @@
                         <input type="text" class="form-control" id="student_name" name="Name" readonly>
                     </div>
                     <div class="mb-3">
-                        <label for="studentID" class="form-label">Full name</label>
                         <input type="text" class="form-control" id="studentID" name="studentID" hidden>
                     </div>
                     <!-- Scores and Grades -->
@@ -331,10 +339,14 @@
                             <input type="number" class="form-control" id="FirstAss" name="1stAss" min="0" max="5">
                         </div>
 
-                        <!-- Automatic Score -->
                         <div class="col-6">
-                            <label for="MidTermTest" class="form-label">MidTermTest (20)</label>
-                            <input type="number" class="form-control" id="MidTermTest" name="MidTermTest" min="0" max="20" >
+                            <label for="MidTermTest" class="form-label">MidTermTest (10)</label>
+                            <input type="number" class="form-control" id="MidTermTest" name="MidTermTest" min="0" max="10" >
+                        </div>
+
+                        <div class="col-6">
+                            <label for="Project" class="form-label">Project (10)</label>
+                            <input type="number" class="form-control" id="Project" name="Project" min="0" max="10" >
                         </div>
 
                         <div class="col-6">

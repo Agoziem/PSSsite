@@ -304,6 +304,7 @@ function populatetable(tabledata) {
             <td>${data['1sttest']}</td>
             <td>${data['1stAss']}</td>
             <td>${data['MidTermTest']}</td>
+            <td>${data['Project']}</td>
             <td>${data['2ndTest']}</td>
             <td>${data['2ndAss']}</td>
             <td>${data['CA'] || '-'}</td>
@@ -662,7 +663,7 @@ class DataTable {
     studentnameinput.value = tabledata[1].innerText
 
     const studentidinput = inputform.querySelector('#studentID')
-    studentidinput.value = tabledata[13].innerText
+    studentidinput.value = tabledata[14].innerText
 
     const FirstTest = inputform.querySelector('#FirstTest')
     FirstTest.value = tabledata[2].innerText
@@ -671,13 +672,16 @@ class DataTable {
     FirstAss.value = tabledata[3].innerText
 
     const MidTermTest = inputform.querySelector('#MidTermTest')
-    MidTermTest.value = tabledata[4].innerText
+        MidTermTest.value = tabledata[4].innerText
+
+    const Project = inputform.querySelector('#Project')
+    Project.value = tabledata[5].innerText
 
     const SecondAss = inputform.querySelector('#SecondAss')
-    SecondAss.value = tabledata[5].innerText
+    SecondAss.value = tabledata[6].innerText
 
     const SecondTest = inputform.querySelector('#SecondTest')
-    SecondTest.value = tabledata[6].innerText
+    SecondTest.value = tabledata[7].innerText
 
     const Exam = inputform.querySelector('#Exam')
     Exam.value = tabledata[8].innerText

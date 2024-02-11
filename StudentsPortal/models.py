@@ -117,6 +117,7 @@ class Result(models.Model):
 	FirstTest= models.CharField(max_length=100, blank=True,null=True , default="-")
 	FirstAss= models.CharField(max_length=100, blank=True,null=True , default="-")
 	MidTermTest= models.CharField(max_length=100, blank=True,null=True , default="-")
+	Project= models.CharField(max_length=100, blank=True,null=True , default="-")
 	SecondAss= models.CharField(max_length=100, blank=True,null=True , default="-")
 	SecondTest= models.CharField(max_length=100, blank=True,null=True , default="-")
 	CA= models.CharField(max_length=100, blank=True,null=True , default="-")
