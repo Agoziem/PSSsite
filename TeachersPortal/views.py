@@ -318,7 +318,7 @@ def publish_student_result_view(request):
         print(str(e))
         return JsonResponse({
             "type": "error",
-            "message": "An error occurred while publishing Student Results" 
+            "message": str(e) 
         }, safe=False)
 
 
