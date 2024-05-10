@@ -189,7 +189,7 @@ const showStudentSubjectResults = (student) => {
             class="list-group-item d-flex justify-content-between align-items-center text-secondary fw-bold"
           >
              ${studentResult[subject].subject_name}
-            <i class="fa-solid fa-xmark me-3 text-danger fw-bold "></i>
+            <i class="fa-solid fa-xmark me-3 fw-bold "></i>
           </li>`;
     }
   });
