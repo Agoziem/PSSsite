@@ -50,8 +50,8 @@ def getstudentsubjecttotals_view(request):
                 subject['Total'] = subresult.Total
                 subject['published'] = subresult.published
             except:
-                subject['subject_code'] = '-'
-                subject['subject_name'] = '-'
+                subject['subject_code'] = subobject.subject_code
+                subject['subject_name'] = subobject.subject_name
                 subject['Total'] = "-"
                 subject['published'] = False
             student_dict[subobject.subject_code] = subject
