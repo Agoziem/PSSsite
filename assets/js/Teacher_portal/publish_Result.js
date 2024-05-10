@@ -186,7 +186,7 @@ const showStudentSubjectResults = (student) => {
           </li>`;
     } else {
       return `<li
-            class="list-group-item d-flex justify-content-between align-items-center text-danger fw-bold"
+            class="list-group-item d-flex justify-content-between align-items-center text-secondary fw-bold"
           >
              ${studentResult[subject].subject_name}
             <i class="fa-solid fa-xmark me-3 text-danger fw-bold "></i>
