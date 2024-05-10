@@ -12,15 +12,15 @@ ROLE_CHOICES = [
     ]
 
 class Teacher(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE, default=2)  
+	user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
 	FirstName= models.CharField(max_length= 200, blank=True,default='None')
 	LastName= models.CharField(max_length= 200, blank=True, default='None')
 	Phone_number= models.CharField(max_length= 200, blank=True)
 	Email= models.EmailField(max_length= 200, blank=True)
 	teachers_id=models.CharField(max_length= 200, blank=True)
 	Role= models.CharField(max_length= 200, blank=True , default="Teacher",choices=ROLE_CHOICES )
-	subjects_taught=models.ManyToManyField(Subject)
-	classes_taught=models.ManyToManyField(Class,related_name='assigned_classes')
+	subjects_taught=models.ManyToManyField(Subject ,blank=True,related_name='assigned_subjects')
+	classes_taught=models.ManyToManyField(Class,blank=True,related_name='assigned_classes')
 	classFormed = models.ForeignKey(Class,on_delete=models.CASCADE, blank=True, null=True )
 	Headshot=models.ImageField(upload_to='assets/TeachersProfileimages', blank=True)
 	
@@ -38,8 +38,8 @@ class Teacher(models.Model):
 		return url
 	
 	def save(self, *args, **kwargs):
-		if self.id:  # if object exists in database
-			super().save(*args, **kwargs)  # simply update the fields
+		if self.teachers_id:
+			super().save(*args, **kwargs)
 		else:  # if object is new
 			while not self.teachers_id:
 				random_pin = str(random.randint(1000, 9999))

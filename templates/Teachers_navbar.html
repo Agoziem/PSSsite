@@ -129,6 +129,15 @@
                             Publish Result
                         </a>
                         {% endif %}
+
+                        {% if request.user.teacher.Role == 'Admin' %}
+                        <div class="sb-sidenav-menu-heading">ADMIN</div>
+                        <a class="nav-link" href="{% url 'TeachersPortal:schoolresults' %}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                            School Results
+                        </a>
+                        {% endif %}
+                        
                         <a class="nav-link" href="{% url 'TeachersPortal:profile' id=request.user.teacher.id %}">
                             <div class="sb-nav-link-icon"><i class="fas fa-solid fa-user"></i></div>
                              Profile

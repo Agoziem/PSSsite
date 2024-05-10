@@ -33,7 +33,7 @@ class ClassAdmin(admin.ModelAdmin):
 
 @admin.register(Student_Result_Data)
 class Student_Result_DataAdmin(admin.ModelAdmin):
-    list_display = ('Student_name', 'Position', 'display_Class', 'Average')
+    list_display = ('Student_name','display_Class', 'Term', 'AcademicSession', 'published')
     ordering = ('Student_name', 'Position', 'Average')
     search_fields = ('Student_name__student_class','Position', 'Average')
     list_filter = ('Student_name__student_class','Student_name', 'Position', 'Average')
@@ -45,7 +45,7 @@ class Student_Result_DataAdmin(admin.ModelAdmin):
 
 @admin.register(Result)
 class ResultAdmin(admin.ModelAdmin):
-    list_display = ('student','student_class','Subject')
+    list_display = ('student','student_class','Subject','published')
     ordering = ('student','student_class','Subject')
     search_fields = ('student_class','Subject') 
     list_filter = ('student','student_class','Subject')

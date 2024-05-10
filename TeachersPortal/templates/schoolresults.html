@@ -1,0 +1,140 @@
+{% extends 'Teachers_navbar.html' %} {% load static %} {% block content%}
+<section class="pt-4 pb-5">
+    <nav
+      class="ms-4"
+      style="--bs-breadcrumb-divider: '>'"
+      aria-label="breadcrumb"
+    >
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'TeachersPortal:Teachers_dashboard' %}">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          School Results
+        </li>
+      </ol>
+    </nav>
+    <hr />
+    <div class="container-fluid px-3 px-md-1">
+      <div class="d-flex flex-column align-items-center justify-content-between">
+        <h1 class="mt-3 text-center"> <span id="studentclassholder"></span> Students Results</h1>
+        <ol class="breadcrumb mb-2">
+          {% if teacher.FirstName == "None" %}
+          <div>
+            <a
+              href="{% url 'TeachersPortal:profile' teacher.id %}"
+              class="text-decoration-none"
+            >
+              edit your Teachers Profile to perform futher Action
+            </a>
+          </div>
+          {% else %}
+          <li class="breadcrumb-item active">
+            School Students Results
+          </li>
+          {% endif %}
+        </ol>
+  
+        <!-- Result badge -->
+        <div
+          id="classresultpublishedbadge"
+          class="badge bg-secondary rounded-pill p-2 px-3 mb-5"
+        >
+            <i class="fa-solid fa-check-circle me-2"></i>
+            Fetching Results ...
+        </div>
+      </div>
+  
+      <!-- Table Section -->
+      <div class="row justify-content-center">
+        <div class="col-md-3 pt-2 me-0 me-md-4">
+          <form
+            action=""
+            id="resultcredentialform"
+            class="mb-3 p-3"
+            style="background-color: #eaecee"
+          >
+            <input type="text" value="{{ class.Class }}" hidden />
+            <div class="mb-2">
+              <label>Classes : </label>
+              <select id="school_classes" class="form-select" name="classname" required>
+                {% for class in school_classes %}
+                <option
+                  value="{{ class.Class }}"
+                  {%
+                  if
+                  forloop.first
+                  %}selected{%
+                  endif
+                  %}
+                >
+                  {{ class.Class }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-2">
+              <label for="academicSessionSelect">Academic Session:</label>
+              <select
+                id="session"
+                name="session"
+                class="form-select"
+                required
+              >
+                {% for Session in academic_session %}
+                <option
+                  value="{{ Session.session }}"
+                  {%
+                  if
+                  forloop.first
+                  %}selected{%
+                  endif
+                  %}
+                >
+                  {{ Session.session }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label for="termSelect">Term:</label>
+              <select id="term" name="term" class="form-select" required>
+                {% for Term in terms %}
+                <option
+                  value="{{ Term.term }}"
+                  {%
+                  if
+                  forloop.first
+                  %}selected{%
+                  endif
+                  %}
+                >
+                  {{ Term.term }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100 mb-4">
+              Verify Submissions
+            </button>
+          </form>
+        </div>
+        <div class="col-md-5">
+          <div class="card px-4 py-4 pb-2 me-0 me-md-4">
+            <h6>Subject Results Published</h6>
+            <ul id="subjectpublished" class="list-group list-group-flush ">
+                <li class="list-group-item d-flex justify-content-between align-items-center fw-bold text-success">
+                    Fetching Subjects ...
+                </li>
+            </ul>
+            <p id="Publishedcounter" class="text-center mt-3">
+            </p>
+          </div>
+        </div>
+      </div>
+  </section>
+    <script src="{% static 'js/admin_portal/results.js' %}"></script>
+{% endblock %}
