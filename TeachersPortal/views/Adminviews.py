@@ -19,7 +19,6 @@ def schoolresult_view(request):
 def getclasspublishedResults(request):
     try:
         data = json.loads(request.body)
-        print(data)
         class_ =data.get('classname')
         term = data.get('term')
         academic_session = data.get('session')

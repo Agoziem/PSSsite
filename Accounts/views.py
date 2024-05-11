@@ -22,46 +22,45 @@ def login_view(request):
     return render(request, 'login.html')
 
 
-def signup_view(request):
-    classes = Class.objects.all()
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password2']
-        print(request.POST)
-        Role = request.POST['Groupname']
-        if 'email' in request.POST:
-            email = request.POST['email']
-        else:
-            email = ''
-        if Role == 'Formteacher':
-            classname = request.POST['Classname']
-        try:
-            User.objects.get(username=username)
-            messages.error(request, 'Username is already taken.')
-        except User.DoesNotExist:
-            user = create_user_with_group(username, password, email, Role)
-            login(request, user)
-            user.is_staff = True
-            user.save()
-            if Role == 'Formteacher':
-                class_formed=Class.objects.get(Class=classname)
-                teacher = Teacher.objects.create(
-                    user=user,
-                    Role=Role,
-                    classFormed=class_formed
-                    )
-                teacher.save()
-            else:
-                teacher = Teacher.objects.create(
-                    user=user,
-                    Role=Role,
-                    )
-                teacher.save()
-            return redirect(reverse('TeachersPortal:profile', kwargs={'id': teacher.id }))  # Replace 'home' with the name of your desired homepage URL
-    context = {
-        'classes': classes
-    }
-    return render(request, 'sign_up.html',context)
+# def signup_view(request):
+#     classes = Class.objects.all()
+#     if request.method == 'POST':
+#         username = request.POST['username']
+#         password = request.POST['password2']
+#         Role = request.POST['Groupname']
+#         if 'email' in request.POST:
+#             email = request.POST['email']
+#         else:
+#             email = ''
+#         if Role == 'Formteacher':
+#             classname = request.POST['Classname']
+#         try:
+#             User.objects.get(username=username)
+#             messages.error(request, 'Username is already taken.')
+#         except User.DoesNotExist:
+#             user = create_user_with_group(username, password, email, Role)
+#             login(request, user)
+#             user.is_staff = True
+#             user.save()
+#             if Role == 'Formteacher':
+#                 class_formed=Class.objects.get(Class=classname)
+#                 teacher = Teacher.objects.create(
+#                     user=user,
+#                     Role=Role,
+#                     classFormed=class_formed
+#                     )
+#                 teacher.save()
+#             else:
+#                 teacher = Teacher.objects.create(
+#                     user=user,
+#                     Role=Role,
+#                     )
+#                 teacher.save()
+#             return redirect(reverse('TeachersPortal:profile', kwargs={'id': teacher.id }))  # Replace 'home' with the name of your desired homepage URL
+#     context = {
+#         'classes': classes
+#     }
+#     return render(request, 'sign_up.html',context)
 
 @login_required
 def logout_view(request):
