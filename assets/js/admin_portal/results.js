@@ -119,7 +119,7 @@ function displaypublishedResult(data) {
         if (subject.published) {
           return `<li class="list-group-item d-flex justify-content-between align-items-center fw-bold text-success">
                     <span>
-                        <i class="fa-solid fa-${index + 1} me-2"></i>
+                        <span class="me-2">${index + 1}.</i>
                         ${subject.subject}
                     </span>
                     
@@ -128,7 +128,7 @@ function displaypublishedResult(data) {
         } else {
           return `<li class="list-group-item d-flex justify-content-between align-items-center fw-bold text-danger">
                     <span>
-                        <i class="fa-solid fa-${index + 1} me-2"></i>
+                        <span class="me-2">${index + 1}.</i>
                         ${subject.subject}
                     </span>
                     <i class="fa-solid fa-xmark"></i>
